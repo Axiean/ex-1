@@ -1,9 +1,9 @@
 import { Suspense, lazy } from "react";
-import App from "next/app";
-import dynamic from "next/dynamic";
+import App, { AppProps } from "next/app";
+
 const Nav = lazy(() => import("home/nav"));
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Suspense fallback={"loading"}>
@@ -14,8 +14,9 @@ function MyApp({ Component, pageProps }) {
   );
 }
 
-MyApp.getInitialProps = async (ctx) => {
+MyApp.getInitialProps = async (ctx: any) => {
   const appProps = await App.getInitialProps(ctx);
   return appProps;
 };
+
 export default MyApp;

@@ -1,4 +1,4 @@
 export default {
-  "/shop": "./shop",
+  "/products": "./products",
   "/p/*": "./pdp",
 };

@@ -1,12 +1,12 @@
 import React, { Fragment, Suspense, lazy } from "react";
 import Head from "next/head";
-import dynamic from "next/dynamic";
-typeof window !== "undefined" && console.log(window.checkout);
+import { NextPage } from "next";
+
 const RemoteTitle = lazy(() => import("checkout/title"));
 
-const Home = ({ loaded }) => {
+const Home: NextPage = () => {
   return (
-    <div>
+    <>
       <Head>
         <title>Home</title>
         <link rel="icon" href="/nextjs-ssr/home/public/favicon.ico" />
@@ -96,10 +96,10 @@ const Home = ({ loaded }) => {
           color: #333;
         }
       `}</style>
-    </div>
+    </>
   );
 };
-//
+
 Home.getInitialProps = async (ctx) => {
   return {};
 };

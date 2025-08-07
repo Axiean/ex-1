@@ -1,8 +1,15 @@
 import React from "react";
 import Head from "next/head";
 import dynamic from "next/dynamic";
+import { NextPage } from "next";
+
 const CC = dynamic(() => import("../components/test"), { ssr: false });
-const Checkout = (props) => (
+
+interface CheckoutProps {
+  test?: number;
+}
+
+const Checkout: NextPage<CheckoutProps> = (props) => (
   <div>
     <Head>
       <title>checkout</title>
@@ -41,7 +48,9 @@ const Checkout = (props) => (
     `}</style>
   </div>
 );
+
 Checkout.getInitialProps = async () => {
   return { test: 123 };
 };
+
 export default Checkout;

@@ -12,12 +12,12 @@ module.exports = {
   webpack(config, options) {
     config.plugins.push(
       new NextFederationPlugin({
-        name: "shop",
+        name: "products",
         filename: "static/chunks/remoteEntry.js",
         dts: false,
         exposes: {
-          "./shop": "./pages/shop.js",
-          "./pdp": "./pages/p/[...slug].js",
+          "./products": "./pages/products.tsx",
+          "./pdp": "./pages/p/[...slug].tsx",
           "./pages-map": "./pages-map.js",
         },
         remotes: remotes(options.isServer),

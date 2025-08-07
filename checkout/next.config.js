@@ -5,7 +5,7 @@ const remotes = (isServer) => {
   const location = isServer ? "ssr" : "chunks";
   return {
     home: `home@http://localhost:3001/_next/static/${location}/remoteEntry.js`,
-    shop: `shop@http://localhost:3002/_next/static/${location}/remoteEntry.js`,
+    products: `products@http://localhost:3002/_next/static/${location}/remoteEntry.js`,
   };
 };
 module.exports = {
@@ -16,8 +16,8 @@ module.exports = {
         filename: "static/chunks/remoteEntry.js",
         dts: false,
         exposes: {
-          "./title": "./components/exposedTitle.js",
-          "./checkout": "./pages/checkout.js",
+          "./title": "./components/exposedTitle.tsx",
+          "./checkout": "./pages/checkout.tsx",
           "./pages-map": "./pages-map.js",
         },
         remotes: remotes(options.isServer),

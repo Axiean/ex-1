@@ -1,30 +1,35 @@
 import React from "react";
 import Head from "next/head";
 import Link from "next/link";
+import { NextPage, GetServerSideProps } from "next";
+
 const productLinks = [
   { href: "/p/1", label: "Product 1" },
   { href: "/p/2", label: "Product 2" },
   { href: "/p/3", label: "Product 3" },
 ].map((link) => {
-  link.key = `product-link-${link.href}-${link.label}`;
   return link;
 });
 
-const Shop = (props) => (
+interface productsProps {
+  test?: number;
+}
+
+const products: NextPage<productsProps> = (props) => (
   <div>
     <Head>
-      <title>Shop</title>
-      <link rel="icon" href="/nextjs-ssr/shop/public/favicon.ico" />
+      <title>products</title>
+      <link rel="icon" href="/nextjs-ssr/products/public/favicon.ico" />
     </Head>
 
     <div className="hero">
-      <h1>Shop Page</h1>
+      <h1>products Page</h1>
       <h3 className="title">
         This is a federated page owned by localhost:3002
       </h3>
       <ul>
-        {productLinks.map(({ key, href, label }) => (
-          <li key={key}>
+        {productLinks.map(({ href, label }) => (
+          <li key={label}>
             <Link href={href}>{label}</Link>
           </li>
         ))}
@@ -49,7 +54,9 @@ const Shop = (props) => (
     `}</style>
   </div>
 );
-export const getServerSideProps = async () => {
+
+export const getServerSideProps: GetServerSideProps = async () => {
   return { props: { test: 1234 } };
 };
-export default Shop;
+
+export default products;

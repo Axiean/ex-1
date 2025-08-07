@@ -1,12 +1,12 @@
 import { Suspense, lazy } from "react";
-import App from "next/app";
-import dynamic from "next/dynamic";
+import App, { AppProps } from "next/app";
+
 const Nav = lazy(() => {
   console.log(import("home/nav"));
   return import("home/nav");
 });
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps }: AppProps) {
   console.log("in app");
   return (
     <>
@@ -19,7 +19,7 @@ function MyApp({ Component, pageProps }) {
   );
 }
 
-MyApp.getInitialProps = async (ctx) => {
+MyApp.getInitialProps = async (ctx: any) => {
   console.log("in app getInitialProps");
   const appProps = await App.getInitialProps(ctx);
   return appProps;

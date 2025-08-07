@@ -1,21 +1,33 @@
-import Document, { Html, Head, Main, NextScript } from "next/document";
-import React from "react";
+import Document, {
+  Html,
+  Head,
+  Main,
+  NextScript,
+  DocumentContext,
+  DocumentInitialProps,
+} from "next/document";
+import React, { ReactElement } from "react";
 import {
   revalidate,
   FlushedChunks,
   flushChunks,
 } from "@module-federation/nextjs-mf/utils";
 
-class MyDocument extends Document {
-  static async getInitialProps(ctx) {
+// Define an interface for the custom props that includes 'chunks'
+interface MyDocumentProps extends DocumentInitialProps {
+  chunks: any[];
+}
+
+class MyDocument extends Document<MyDocumentProps> {
+  static async getInitialProps(ctx: DocumentContext): Promise<MyDocumentProps> {
     if (
       process.env.NODE_ENV === "development" &&
-      !ctx.req.url.includes("_next")
+      !ctx.req?.url?.includes("_next")
     ) {
       await revalidate().then((shouldReload) => {
         if (shouldReload) {
-          ctx.res.writeHead(302, { Location: ctx.req.url });
-          ctx.res.end();
+          ctx.res?.writeHead(302, { Location: ctx.req?.url });
+          ctx.res?.end();
         }
       });
     } else {
@@ -32,7 +44,7 @@ class MyDocument extends Document {
     };
   }
 
-  render() {
+  render(): ReactElement {
     return (
       <Html>
         <Head>
