@@ -2,3 +2,4 @@ packages:
   - "basket"
   - "products"
   - "home"
+  - "ui-library"

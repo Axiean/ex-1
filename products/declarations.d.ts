@@ -1,3 +1,4 @@
 declare module "home/nav";
 declare module "home/home";
-declare module "checkout/checkout";
+declare module "basket/basket";
+declare module "home/ui-library";

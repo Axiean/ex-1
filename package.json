@@ -5,8 +5,8 @@
   "version": "0.0.1",
   "scripts": {
     "preinstall": "pnpm install --ignore-scripts",
-    "start": "pnpm --parallel --filter nextjs-ssr_* dev",
-    "build": "pnpm --parallel --filter nextjs-ssr_* build",
+    "dev": "concurrently \"pnpm --filter nextjs-ssr_home dev\" \"pnpm --filter nextjs-ssr_products dev\" \"pnpm --filter nextjs-host-react-remote_remote start\"",
+    "build": "pnpm --filter nextjs-ssr_* build && pnpm --filter nextjs-host-react-remote_remote build",
     "serve": "pnpm --parallel --filter nextjs-ssr_* start",
     "e2e:ci": "pnpm run start & sleep 10 && wait-on http-get://localhost:3001/ && wait-on http-get://localhost:3002/ && wait-on http-get://localhost:3000/ && npx cypress run --config-file ../cypress-e2e/config/cypress.config.ts --config '{\"supportFile\": \"../cypress-e2e/support/e2e.ts\"}' --spec \"./e2e/*.cy.ts\" --browser=chrome"
   },

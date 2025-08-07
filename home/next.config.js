@@ -5,10 +5,12 @@ const remotes = (isServer) => {
   const location = isServer ? "ssr" : "chunks";
   return {
     products: `products@http://localhost:3002/_next/static/${location}/remoteEntry.js`,
-    checkout: `checkout@http://localhost:3000/_next/static/${location}/remoteEntry.js`,
+    basket: `basket@http://localhost:3000/remoteEntry.js`,
   };
 };
 module.exports = {
+  transpilePackages: ["ui-library"],
+
   webpack(config, options) {
     config.plugins.push(
       new NextFederationPlugin({
@@ -16,9 +18,10 @@ module.exports = {
         filename: "static/chunks/remoteEntry.js",
         dts: false,
         exposes: {
-          "./nav": "./components/nav.tsx",
-          "./home": "./pages/index.tsx",
+          "./nav": "./src/components/nav.tsx",
+          "./home": "./src/pages/index.tsx",
           "./pages-map": "./pages-map.js",
+          "./ui-library": "./../ui-library/src/index.ts",
         },
         remotes: remotes(options.isServer),
         shared: {},

@@ -1,16 +1,14 @@
-import { Suspense, lazy } from "react";
 import App, { AppProps } from "next/app";
-
-const Nav = lazy(() => import("home/nav"));
+import { Provider } from "react-redux";
+import { store } from "../store/store";
+import { Nav } from "./../../../ui-library/src";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <>
-      <Suspense fallback={"loading"}>
-        <Nav />
-      </Suspense>
+    <Provider store={store}>
+      <Nav />
       <Component {...pageProps} />
-    </>
+    </Provider>
   );
 }
 
@@ -18,5 +16,4 @@ MyApp.getInitialProps = async (ctx: any) => {
   const appProps = await App.getInitialProps(ctx);
   return appProps;
 };
-
 export default MyApp;

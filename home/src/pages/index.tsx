@@ -1,10 +1,33 @@
 import React, { Fragment, Suspense, lazy } from "react";
 import Head from "next/head";
 import { NextPage } from "next";
+import dynamic from "next/dynamic";
+import { Product, useGetProductsQuery } from "../store/productsApi";
 
-const RemoteTitle = lazy(() => import("checkout/title"));
+interface ProductListProps {
+  products: Product[];
+}
+
+const Basket = dynamic(() => import("basket/Basket"), {
+  ssr: false,
+  loading: () => <p>Loading Basket...</p>,
+});
+
+const Products = dynamic(() => import("products/products"), {
+  ssr: false,
+  loading: () => <p>Loading Products...</p>,
+});
+
+const ProductList = dynamic<ProductListProps>(
+  () => import("products/ProductList"),
+  {
+    ssr: false,
+    loading: () => <p>Loading Products...</p>,
+  }
+);
 
 const Home: NextPage = () => {
+  const { data: products, isLoading, error } = useGetProductsQuery();
   return (
     <>
       <Head>
@@ -12,34 +35,21 @@ const Home: NextPage = () => {
         <link rel="icon" href="/nextjs-ssr/home/public/favicon.ico" />
       </Head>
 
-      <div className="hero" style={{ backgroundColor: "black" }}>
-        <Suspense fallback={"loading remote title"}>
-          <RemoteTitle />
-        </Suspense>
-        <h1 className="title">
-          Welcome to Next.js on Webpack 5! <code>home</code>
-        </h1>
-        <p className="description">
-          To get started, edit <code>pages/index.js</code> and save to reload.
-        </p>
+      <div style={{ padding: "2rem" }}>
+        <h2 style={{ textAlign: "center" }}>Featured Products</h2>
+        {isLoading && <p>Loading Products...</p>}
+        {error && <p>Error loading products.</p>}
+        {products && <ProductList products={products} />}
+      </div>
 
-        <div className="row">
-          <a href="https://nextjs.org/docs" className="card">
-            <h3>Documentation &rarr;</h3>
-            <p>Learn more about Next.js in the documentation.</p>
-          </a>
-          <a href="https://nextjs.org/learn" className="card">
-            <h3>Next.js Learn &rarr;</h3>
-            <p>Learn about Next.js by following an interactive tutorial!</p>
-          </a>
-          <a
-            href="https://github.com/zeit/next.js/tree/master/examples"
-            className="card"
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Find other example boilerplates on the Next.js GitHub.</p>
-          </a>
-        </div>
+      <div style={{ padding: "2rem" }}>
+        <h2 style={{ textAlign: "center" }}>Featured Products</h2>
+        <Products />
+      </div>
+
+      <div style={{ padding: "2rem", textAlign: "center" }}>
+        <h2>My Basket</h2>
+        <Basket />
       </div>
 
       <style jsx>{`
@@ -100,8 +110,8 @@ const Home: NextPage = () => {
   );
 };
 
-Home.getInitialProps = async (ctx) => {
-  return {};
-};
+// Home.getInitialProps = async (ctx) => {
+//   return {};
+// };
 
 export default Home;
