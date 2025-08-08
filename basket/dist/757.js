@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunknextjs_host_react_remote_remote=self.webpackChunknextjs_host_react_remote_remote||[]).push([[757],{757:(e,t,n)=>{n.r(t),n.d(t,{default:()=>a});var r=n(406),s=n.n(r);const a=function(){return s().createElement(s().Fragment,null,s().createElement("div",null,"This is the Remote App"))}}}]);

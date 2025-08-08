@@ -1,21 +1,25 @@
-import React, { Fragment, Suspense, lazy } from "react";
+import React from "react";
 import Head from "next/head";
 import { NextPage } from "next";
 import dynamic from "next/dynamic";
 import { Product, useGetProductsQuery } from "../store/productsApi";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { addToBasket } from "../store/basketSlice";
+import { Space, Typography } from "antd";
+
+const { Title, Text, Paragraph } = Typography;
 
 interface ProductListProps {
   products: Product[];
+  onAddToCart: (product: Product) => void;
 }
 
-const Basket = dynamic(() => import("basket/Basket"), {
-  ssr: false,
-  loading: () => <p>Loading Basket...</p>,
-});
+interface BasketProps {
+  items: Product[];
+}
 
-const Products = dynamic(() => import("products/products"), {
+const Basket = dynamic<BasketProps>(() => import("basket/Basket"), {
   ssr: false,
-  loading: () => <p>Loading Products...</p>,
 });
 
 const ProductList = dynamic<ProductListProps>(
@@ -28,6 +32,15 @@ const ProductList = dynamic<ProductListProps>(
 
 const Home: NextPage = () => {
   const { data: products, isLoading, error } = useGetProductsQuery();
+
+  const basketItems = useAppSelector((state) => state.basket.items);
+  const dispatch = useAppDispatch();
+
+  const handleAddToCart = (product: Product) => {
+    dispatch(addToBasket(product));
+    alert(`${product.title} added to basket!`);
+  };
+
   return (
     <>
       <Head>
@@ -36,82 +49,33 @@ const Home: NextPage = () => {
       </Head>
 
       <div style={{ padding: "2rem" }}>
-        <h2 style={{ textAlign: "center" }}>Featured Products</h2>
+        <Space direction="vertical">
+          <Title level={5}>Products</Title>
+          {/* <Title level={2}>Products</Title> */}
+          <Paragraph
+            type="secondary"
+            style={{ maxWidth: "600px", margin: "0 auto" }}
+          >
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quos ad
+            harum cupiditate magnam veritatis perferendis aperiam saepe quia
+            totam deserunt amet neque, eligendi autem vitae nemo quibusdam culpa
+            architecto facere.
+          </Paragraph>
+        </Space>
+
         {isLoading && <p>Loading Products...</p>}
         {error && <p>Error loading products.</p>}
-        {products && <ProductList products={products} />}
-      </div>
-
-      <div style={{ padding: "2rem" }}>
-        <h2 style={{ textAlign: "center" }}>Featured Products</h2>
-        <Products />
+        {products && (
+          <ProductList products={products} onAddToCart={handleAddToCart} />
+        )}
       </div>
 
       <div style={{ padding: "2rem", textAlign: "center" }}>
-        <h2>My Basket</h2>
-        <Basket />
+        {/* <h2>My Basket</h2> */}
+        <Basket items={basketItems} />
       </div>
-
-      <style jsx>{`
-        .hero {
-          background-color: #000;
-          width: 100%;
-          color: #333;
-        }
-
-        .title {
-          margin: 0;
-          width: 100%;
-          padding-top: 80px;
-          line-height: 1.15;
-          font-size: 48px;
-        }
-
-        .title,
-        .description {
-          text-align: center;
-        }
-
-        .row {
-          max-width: 880px;
-          margin: 80px auto 40px;
-          display: flex;
-          flex-direction: row;
-          justify-content: space-around;
-        }
-
-        .card {
-          padding: 18px 18px 24px;
-          width: 220px;
-          text-align: left;
-          text-decoration: none;
-          color: #434343;
-          border: 1px solid #9b9b9b;
-        }
-
-        .card:hover {
-          border-color: #067df7;
-        }
-
-        .card h3 {
-          margin: 0;
-          color: #067df7;
-          font-size: 18px;
-        }
-
-        .card p {
-          margin: 0;
-          padding: 12px 0 0;
-          font-size: 13px;
-          color: #333;
-        }
-      `}</style>
     </>
   );
 };
-
-// Home.getInitialProps = async (ctx) => {
-//   return {};
-// };
 
 export default Home;

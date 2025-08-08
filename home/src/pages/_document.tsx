@@ -52,7 +52,7 @@ class MyDocument extends Document<MyDocumentProps> {
           <FlushedChunks chunks={this.props.chunks} />
         </Head>
 
-        <body className="bg-background-grey">
+        <body>
           <Main />
           <NextScript />
         </body>

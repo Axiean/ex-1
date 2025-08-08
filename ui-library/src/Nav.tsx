@@ -1,54 +1,61 @@
-import React, { Suspense, lazy } from "react";
+import React from "react";
+import { Layout, Flex, Space, Dropdown, Menu, Typography, Badge } from "antd";
+import {
+  DownOutlined,
+  ShoppingOutlined,
+  SearchOutlined,
+  ShoppingCartOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
 import Link from "next/link";
+const { Header } = Layout;
 
-const links = [
-  { href: "https://zeit.co/now", label: "ZEIT" },
-  { href: "https://github.com/zeit/next.js", label: "GitHub" },
-].map((link) => {
-  return link;
-});
+// --- Main Navigation Items ---
+const navItems = [
+  { key: "women", label: "Women" },
+  { key: "men", label: "Men" },
+  { key: "kids", label: "Kids" },
+  { key: "gift-cards", label: "Gift Cards" },
+];
 
-export const Nav = () => (
-  <nav>
-    <ul>
-      <li>
-        <Link href="/">Home</Link>
-        <Link href="/products">products</Link>
-        <Link href="/basket">Basket</Link>{" "}
-      </li>
-      {links.map(({ href, label }) => (
-        <li key={label}>
-          <a href={href}>{label}</a>
-        </li>
-      ))}
-    </ul>
+export const Nav = () => {
+  return (
+    <Header
+      style={{
+        padding: 0,
+        backgroundColor: "#fff",
+        height: "auto",
+        lineHeight: "initial",
+      }}
+    >
+      <Flex
+        justify="space-between"
+        align="center"
+        style={{ padding: "12px 24px", borderBottom: "1px solid #f0f0f0" }}
+      >
+        <Flex align="center">
+          <ShoppingOutlined
+            style={{ fontSize: "32px", color: "#1677ff", marginRight: "24px" }}
+          />
+          <Menu
+            mode="horizontal"
+            items={navItems}
+            style={{ borderBottom: "none", minWidth: "300px" }}
+          />
+        </Flex>
 
-    <style jsx>{`
-      :global(body) {
-        margin: 0;
-        font-family: -apple-system, BlinkMacSystemFont, Avenir Next, Avenir,
-          Helvetica, sans-serif;
-      }
-      nav {
-        text-align: center;
-      }
-      ul {
-        display: flex;
-        justify-content: space-between;
-      }
-      nav > ul {
-        padding: 4px 16px;
-      }
-      li {
-        display: flex;
-        padding: 6px 8px;
-      }
-      a {
-        color: #067df7;
-        text-decoration: none;
-        font-size: 13px;
-        padding-right: 10px;
-      }
-    `}</style>
-  </nav>
-);
+        <Space size="large">
+          <SearchOutlined style={{ fontSize: "20px", cursor: "pointer" }} />
+          <Badge count={99} overflowCount={99}>
+            <Link href={"/basket"}>
+              <ShoppingCartOutlined
+                style={{ fontSize: "20px", cursor: "pointer" }}
+              />
+            </Link>
+          </Badge>
+          <UserOutlined style={{ fontSize: "20px", cursor: "pointer" }} />
+        </Space>
+      </Flex>
+    </Header>
+  );
+};
