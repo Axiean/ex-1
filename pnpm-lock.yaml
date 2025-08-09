@@ -109,6 +109,9 @@ importers:
 
   home:
     dependencies:
+      '@ant-design/nextjs-registry':
+        specifier: ^1.1.0
+        version: 1.1.0(@ant-design/cssinjs@1.24.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(antd@5.26.7(date-fns@2.30.0)(luxon@3.7.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(next@14.2.31(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.90.0))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@module-federation/nextjs-mf':
         specifier: 8.8.34
         version: 8.8.34(@rspack/core@1.4.11(@swc/helpers@0.5.17))(next@14.2.31(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.90.0))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-jsx@5.1.1(react@18.3.1))(typescript@5.9.2)(webpack@5.101.0(webpack-cli@5.1.4))
@@ -267,6 +270,15 @@ packages:
     resolution: {integrity: sha512-o0aCCAlHc1o4CQcapAwWzHeaW2x9F49g7P3IDtvtNXgHowtRWYb7kiubt8sQPFvfVIVU/jLw2hzeSlNt0FU+Uw==}
     engines: {node: '>=8'}
     peerDependencies:
+      react: '>=16.0.0'
+      react-dom: '>=16.0.0'
+
+  '@ant-design/nextjs-registry@1.1.0':
+    resolution: {integrity: sha512-zZ9SKyqTHonUK7l/z/ixpVx0LSnZTlIqYFOccSDI7jx7ojCMTGxzkl3ugGWPPh8xPYDsVxqzwJZBic84H7LgLw==}
+    peerDependencies:
+      '@ant-design/cssinjs': ^1.24.0
+      antd: ^5.0.0
+      next: ^14.0.0 || ^15.0.0
       react: '>=16.0.0'
       react-dom: '>=16.0.0'
 
@@ -3827,6 +3839,14 @@ snapshots:
       '@ant-design/icons-svg': 4.4.2
       '@rc-component/util': 1.2.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       classnames: 2.5.1
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+
+  '@ant-design/nextjs-registry@1.1.0(@ant-design/cssinjs@1.24.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(antd@5.26.7(date-fns@2.30.0)(luxon@3.7.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(next@14.2.31(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.90.0))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@ant-design/cssinjs': 1.24.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      antd: 5.26.7(date-fns@2.30.0)(luxon@3.7.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      next: 14.2.31(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.90.0)
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 

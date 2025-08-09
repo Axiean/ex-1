@@ -7,6 +7,7 @@ import {
   updateQuantity,
 } from "../store/basketSlice";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
+import Head from "next/head";
 
 interface BasketProps {
   items: CartItem[];
@@ -33,13 +34,18 @@ const BasketPage: NextPage = () => {
   };
 
   return (
-    <div style={{ padding: "2rem" }}>
-      <Basket
-        items={basketItems}
-        onRemoveItem={handleRemoveItem}
-        onUpdateQuantity={handleUpdateQuantity}
-      />
-    </div>
+    <>
+      <Head>
+        <title>Shopping Cart</title>
+      </Head>
+      <div style={{ padding: "2rem" }}>
+        <Basket
+          items={basketItems}
+          onRemoveItem={handleRemoveItem}
+          onUpdateQuantity={handleUpdateQuantity}
+        />
+      </div>
+    </>
   );
 };
 

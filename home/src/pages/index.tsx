@@ -1,4 +1,4 @@
-import { Product } from "@/library/types";
+import { Product } from "@library/types";
 import { message, Space, Spin, Typography } from "antd";
 import { NextPage } from "next";
 import dynamic from "next/dynamic";

@@ -1,3 +1,5 @@
+const path = require("path"); // Make sure path is imported at the top
+
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { ModuleFederationPlugin } = require("webpack").container;
 const deps = require("./package.json").dependencies;
@@ -17,7 +19,11 @@ module.exports = {
     publicPath: "auto",
   },
   resolve: {
-    extensions: [".tsx", ".ts", ".jsx", ".js", ".json"],
+    extensions: [".tsx", ".ts", ".jsx", ".js", ".json", ".css"],
+
+    alias: {
+      "@library": path.resolve(__dirname, "../library/src"),
+    },
   },
   module: {
     rules: [

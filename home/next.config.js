@@ -22,6 +22,7 @@ module.exports = {
           "./pages-map": "./pages-map.js",
           "./library/components": "./../library/src/components/index.ts",
           "./library/types": "./../library/src/types/index.ts",
+          "./library/hooks": "./../library/src/hooks/index.ts",
         },
         remotes: remotes(options.isServer),
         shared: {},

@@ -1,9 +1,10 @@
-import type { CartItem } from "@/library/types";
+import type { CartItem } from "@library/types";
 import { List } from "antd";
 import React from "react";
 import { BasketItem } from "./components/BasketItem";
 import { BasketTotals } from "./components/BasketTotals";
 import { EmptyBasket } from "./components/EmptyBasket";
+import { useMediaQuery } from "@library/hooks";
 
 interface BasketProps {
   items?: CartItem[];
@@ -16,14 +17,25 @@ const App: React.FC<BasketProps> = ({
   onRemoveItem = () => {},
   onUpdateQuantity = () => {},
 }) => {
+  const isMobile = useMediaQuery("(max-width: 768px)");
   const subtotal = items.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0
   );
 
-  if (items.length) {
+  const containerStyle: React.CSSProperties = {
+    margin: "0 auto",
+    maxWidth: isMobile ? "95%" : "50%",
+    padding: "24px",
+    backgroundColor: "#ffffff",
+    borderRadius: "8px",
+    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
+    // textAlign: "center",
+  };
+
+  if (items.length > 0) {
     return (
-      <div>
+      <div style={containerStyle}>
         <List
           itemLayout="horizontal"
           dataSource={items}

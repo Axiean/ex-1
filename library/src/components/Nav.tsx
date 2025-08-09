@@ -38,9 +38,15 @@ export const Nav: React.FC<NavProps> = ({ basketItemCount = 0 }) => {
         style={{ padding: "12px 24px", borderBottom: "1px solid #f0f0f0" }}
       >
         <Flex align="center">
-          <ShoppingOutlined
-            style={{ fontSize: "32px", color: "#1677ff", marginRight: "24px" }}
-          />
+          <Link href={"/"}>
+            <ShoppingOutlined
+              style={{
+                fontSize: "32px",
+                color: "#1677ff",
+                marginRight: "24px",
+              }}
+            />
+          </Link>
           <Menu
             mode="horizontal"
             items={navItems}

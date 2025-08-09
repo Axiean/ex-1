@@ -1,4 +1,5 @@
-import { Nav } from "@/library/components";
+import { Nav } from "@library/components";
+import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { AppProps } from "next/app";
 import { Provider } from "react-redux";
 import { useAppSelector } from "../store/hooks";
@@ -17,10 +18,12 @@ const AppNav = () => {
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <Provider store={store}>
-      <AppNav />
-      <Component {...pageProps} />
-    </Provider>
+    <AntdRegistry>
+      <Provider store={store}>
+        <AppNav />
+        <Component {...pageProps} />
+      </Provider>
+    </AntdRegistry>
   );
 }
 
