@@ -5,7 +5,8 @@ import dynamic from "next/dynamic";
 import { Product, useGetProductsQuery } from "../store/productsApi";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { addToBasket } from "../store/basketSlice";
-import { Space, Typography } from "antd";
+import { Space, Spin, Typography } from "antd";
+import { CartItem } from "./../store/basketSlice";
 
 const { Title, Text, Paragraph } = Typography;
 
@@ -14,26 +15,17 @@ interface ProductListProps {
   onAddToCart: (product: Product) => void;
 }
 
-interface BasketProps {
-  items: Product[];
-}
-
-const Basket = dynamic<BasketProps>(() => import("basket/Basket"), {
-  ssr: false,
-});
-
 const ProductList = dynamic<ProductListProps>(
   () => import("products/ProductList"),
   {
     ssr: false,
-    loading: () => <p>Loading Products...</p>,
+    loading: () => <Spin fullscreen />,
   }
 );
 
 const Home: NextPage = () => {
   const { data: products, isLoading, error } = useGetProductsQuery();
 
-  const basketItems = useAppSelector((state) => state.basket.items);
   const dispatch = useAppDispatch();
 
   const handleAddToCart = (product: Product) => {
@@ -68,11 +60,6 @@ const Home: NextPage = () => {
         {products && (
           <ProductList products={products} onAddToCart={handleAddToCart} />
         )}
-      </div>
-
-      <div style={{ padding: "2rem", textAlign: "center" }}>
-        {/* <h2>My Basket</h2> */}
-        <Basket items={basketItems} />
       </div>
     </>
   );

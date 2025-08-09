@@ -18,7 +18,11 @@ const navItems = [
   { key: "gift-cards", label: "Gift Cards" },
 ];
 
-export const Nav = () => {
+interface NavProps {
+  basketItemCount?: number;
+}
+
+export const Nav: React.FC<NavProps> = ({ basketItemCount = 0 }) => {
   return (
     <Header
       style={{
@@ -46,7 +50,7 @@ export const Nav = () => {
 
         <Space size="large">
           <SearchOutlined style={{ fontSize: "20px", cursor: "pointer" }} />
-          <Badge count={99} overflowCount={99}>
+          <Badge count={basketItemCount}>
             <Link href={"/basket"}>
               <ShoppingCartOutlined
                 style={{ fontSize: "20px", cursor: "pointer" }}

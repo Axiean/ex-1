@@ -8,7 +8,7 @@ const remotes = (isServer) => {
   };
 };
 module.exports = {
-  transpilePackages: ["ui-library"],
+  transpilePackages: ["library"],
 
   webpack(config, options) {
     config.plugins.push(

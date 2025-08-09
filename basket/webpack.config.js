@@ -6,29 +6,33 @@ module.exports = {
   entry: "./src/index",
   mode: "development",
   devServer: {
-    port: 3000, // The basket app should run on port 3000
+    port: 3000,
+    hot: true,
+    headers: {
+      "Access-Control-Allow-Origin": "*", // Allows other apps to fetch from this server
+    },
   },
   resolve: {
-    extensions: [".tsx", ".ts", ".jsx", ".js", ".json"], // Add .ts and .tsx
+    extensions: [".tsx", ".ts", ".jsx", ".js", ".json"],
   },
   module: {
     rules: [
       {
-        test: /\.(ts|tsx|js|jsx)$/, // Updated to include .ts and .tsx
+        test: /\.(ts|tsx|js|jsx)$/,
         loader: "babel-loader",
         exclude: /node_modules/,
         options: {
-          presets: ["@babel/preset-react", "@babel/preset-typescript"], // Add typescript preset
+          presets: ["@babel/preset-react", "@babel/preset-typescript"],
         },
       },
     ],
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: "basket", // Changed from "remote" to "basket"
+      name: "basket",
       filename: "remoteEntry.js",
       exposes: {
-        "./Basket": "./src/App", // Expose the main App component as Basket
+        "./Basket": "./src/App",
       },
       shared: {
         ...deps,

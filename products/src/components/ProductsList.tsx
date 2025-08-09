@@ -1,5 +1,5 @@
 import React from "react";
-import { ProductCard, ProductCardProps } from "home/ui-library";
+import { ProductCard, ProductCardProps } from "home/library";
 import { Product } from "../../../home/src/store/productsApi";
 import styles from "./ProductList.module.scss";
 

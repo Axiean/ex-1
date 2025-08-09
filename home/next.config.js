@@ -9,7 +9,7 @@ const remotes = (isServer) => {
   };
 };
 module.exports = {
-  transpilePackages: ["ui-library"],
+  transpilePackages: ["library"],
 
   webpack(config, options) {
     config.plugins.push(
@@ -18,10 +18,9 @@ module.exports = {
         filename: "static/chunks/remoteEntry.js",
         dts: false,
         exposes: {
-          "./nav": "./src/components/nav.tsx",
           "./home": "./src/pages/index.tsx",
           "./pages-map": "./pages-map.js",
-          "./ui-library": "./../ui-library/src/index.ts",
+          "./library": "./../library/src/index.ts",
         },
         remotes: remotes(options.isServer),
         shared: {},

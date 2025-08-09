@@ -1,20 +1,27 @@
-import App, { AppProps } from "next/app";
+import { AppProps } from "next/app";
 import { Provider } from "react-redux";
-import { store } from "../store/store";
-import { Nav } from "./../../../ui-library/src";
+import { Nav } from "../../../library/src";
 import "../styles/global.scss";
+import { useAppSelector } from "../store/hooks";
+import { store } from "../store/store";
+
+const AppNav = () => {
+  const basketItems = useAppSelector((state) => state.basket.items);
+  const totalItems = basketItems.reduce(
+    (total, item) => total + item.quantity,
+    0
+  );
+
+  return <Nav basketItemCount={totalItems} />;
+};
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
-      <Nav />
+      <AppNav />
       <Component {...pageProps} />
     </Provider>
   );
 }
 
-MyApp.getInitialProps = async (ctx: any) => {
-  const appProps = await App.getInitialProps(ctx);
-  return appProps;
-};
 export default MyApp;

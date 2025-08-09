@@ -1,9 +1,6 @@
-// products/pages/products.tsx
 import React from "react";
 import Head from "next/head";
-import Link from "next/link";
 import { NextPage } from "next";
-import { useGetProductsQuery } from "../../../home/store/productsApi";
 
 const Products: NextPage = () => {
   return (

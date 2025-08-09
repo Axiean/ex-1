@@ -1,19 +1,44 @@
+import { Spin } from "antd";
 import { NextPage } from "next";
 import dynamic from "next/dynamic";
-import React, { Suspense } from "react";
+import {
+  CartItem,
+  removeFromBasket,
+  updateQuantity,
+} from "../store/basketSlice";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
 
-// Dynamically import the Basket component and disable SSR
-const BasketComponent = dynamic(() => import("basket/Basket"), {
+interface BasketProps {
+  items: CartItem[];
+  onRemoveItem?: (id: number) => void;
+  onUpdateQuantity?: (id: number, quantity: number) => void;
+}
+
+const Basket = dynamic<BasketProps>(() => import("basket/Basket"), {
   ssr: false,
+  loading: () => <Spin fullscreen />,
 });
 
 const BasketPage: NextPage = () => {
+  const basketItems = useAppSelector((state) => state.basket.items);
+
+  const dispatch = useAppDispatch();
+
+  const handleRemoveItem = (id: number) => {
+    dispatch(removeFromBasket(id));
+  };
+
+  const handleUpdateQuantity = (id: number, quantity: number) => {
+    dispatch(updateQuantity({ id, quantity }));
+  };
+
   return (
     <div style={{ padding: "2rem" }}>
-      <h1>My Basket</h1>
-      <Suspense fallback={<p>Loading basket...</p>}>
-        <BasketComponent />
-      </Suspense>
+      <Basket
+        items={basketItems}
+        onRemoveItem={handleRemoveItem}
+        onUpdateQuantity={handleUpdateQuantity}
+      />
     </div>
   );
 };

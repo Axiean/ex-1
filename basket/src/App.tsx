@@ -1,23 +1,10 @@
-// basket/src/App.tsx
+import { List } from "antd";
 import React from "react";
-import {
-  Card,
-  Table,
-  Avatar,
-  Button,
-  InputNumber,
-  Typography,
-  Divider,
-  Row,
-  Col,
-  Input,
-  Space,
-  List,
-} from "antd";
-import { DeleteOutlined } from "@ant-design/icons";
-import type { TableProps } from "antd";
 
-// --- Type Definitions ---
+import { BasketItem } from "./components/BasketItem";
+import { BasketTotals } from "./components/BasketTotals";
+import { EmptyBasket } from "./components/EmptyBasket";
+
 interface Product {
   id: number;
   title: string;
@@ -32,8 +19,6 @@ interface BasketProps {
 }
 // ---
 
-const { Title, Text } = Typography;
-
 const App: React.FC<BasketProps> = ({
   items = [],
   onRemoveItem = () => {},
@@ -43,71 +28,27 @@ const App: React.FC<BasketProps> = ({
     (acc, item) => acc + item.price * item.quantity,
     0
   );
-  const shipping = subtotal > 0 ? 5.0 : 0;
-  const total = subtotal + shipping;
 
-  return (
-    <>
-      <List
-        itemLayout="horizontal"
-        dataSource={items}
-        renderItem={(item) => (
-          <List.Item>
-            <Space direction="horizontal" align="start">
-              {/* Set fixed height and width for image */}
-              <img
-                src={item.image}
-                style={{
-                  height: 140,
-                  // width: 60,
-                  // objectFit: "fill",
-                  borderRadius: 4,
-                }}
-                alt={item.title}
-              />
-
-              <Space direction="vertical" size={0} align="start">
-                <Text strong>{item.title}</Text>
-                <Text type="secondary">Quantity: {item.quantity}</Text>
-              </Space>
-            </Space>
-
-            <Space direction="vertical" align="end">
-              <Text>${item.price.toFixed(2)}</Text>
-
-              <Button
-                type="link"
-                danger
-                // icon={<DeleteOutlined />}
-                // onClick={() => onRemove(item.id)}
-              >
-                Remove
-              </Button>
-            </Space>
-          </List.Item>
-        )}
-      />
-
-      <Divider />
-
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          padding: "0 16px",
-        }}
-      >
-        <Text strong>Subtotal</Text>
-        <Text strong>${total.toFixed(2)}</Text>
+  if (items.length) {
+    return (
+      <div>
+        <List
+          itemLayout="horizontal"
+          dataSource={items}
+          renderItem={(item) => (
+            <BasketItem
+              item={item}
+              onRemoveItem={onRemoveItem}
+              onUpdateQuantity={onUpdateQuantity}
+            />
+          )}
+        />
+        <BasketTotals subtotal={subtotal} />
       </div>
-
-      <div style={{ padding: "16px" }}>
-        <Button type="primary" block size="large">
-          Checkout
-        </Button>
-      </div>
-    </>
-  );
+    );
+  } else {
+    return <EmptyBasket />;
+  }
 };
 
 export default App;
