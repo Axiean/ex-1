@@ -5,12 +5,16 @@ const deps = require("./package.json").dependencies;
 module.exports = {
   entry: "./src/index",
   mode: "development",
+  devtool: "source-map",
   devServer: {
     port: 3000,
     hot: true,
     headers: {
-      "Access-Control-Allow-Origin": "*", // Allows other apps to fetch from this server
+      "Access-Control-Allow-Origin": "*",
     },
+  },
+  output: {
+    publicPath: "auto",
   },
   resolve: {
     extensions: [".tsx", ".ts", ".jsx", ".js", ".json"],
@@ -27,6 +31,7 @@ module.exports = {
       },
     ],
   },
+
   plugins: [
     new ModuleFederationPlugin({
       name: "basket",

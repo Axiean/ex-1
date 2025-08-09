@@ -1,3 +1,2 @@
-export * from "./Button";
-export * from "./Nav";
-export * from "./ProductCard";
+export * from "./components";
+export * from "./types";

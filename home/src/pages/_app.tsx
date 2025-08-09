@@ -1,9 +1,9 @@
+import { Nav } from "@/library/components";
 import { AppProps } from "next/app";
 import { Provider } from "react-redux";
-import { Nav } from "../../../library/src";
-import "../styles/global.scss";
 import { useAppSelector } from "../store/hooks";
 import { store } from "../store/store";
+import "../styles/global.scss";
 
 const AppNav = () => {
   const basketItems = useAppSelector((state) => state.basket.items);

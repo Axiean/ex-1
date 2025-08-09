@@ -1,23 +1,15 @@
+import type { CartItem } from "@/library/types";
 import { List } from "antd";
 import React from "react";
-
 import { BasketItem } from "./components/BasketItem";
 import { BasketTotals } from "./components/BasketTotals";
 import { EmptyBasket } from "./components/EmptyBasket";
 
-interface Product {
-  id: number;
-  title: string;
-  price: number;
-  image: string;
-  quantity: number;
-}
 interface BasketProps {
-  items?: Product[];
+  items?: CartItem[];
   onRemoveItem?: (id: number) => void;
   onUpdateQuantity?: (id: number, quantity: number) => void;
 }
-// ---
 
 const App: React.FC<BasketProps> = ({
   items = [],

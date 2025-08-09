@@ -1,6 +1,6 @@
+import { ProductCard } from "@/library/components";
+import type { Product } from "@/library/types";
 import React from "react";
-import { ProductCard, ProductCardProps } from "home/library";
-import { Product } from "../../../home/src/store/productsApi";
 import styles from "./ProductList.module.scss";
 
 interface ProductListProps {

@@ -1,19 +1,12 @@
+import { CartItem } from "@/library/types";
 import { DeleteOutlined, MinusOutlined, PlusOutlined } from "@ant-design/icons";
 import { Avatar, Button, InputNumber, List, Space, Typography } from "antd";
 import React from "react";
 
 const { Text } = Typography;
 
-interface Product {
-  id: number;
-  title: string;
-  price: number;
-  image: string;
-  quantity: number;
-}
-
 interface BasketItemProps {
-  item: Product;
+  item: CartItem;
   onRemoveItem: (id: number) => void;
   onUpdateQuantity: (id: number, quantity: number) => void;
 }

@@ -20,7 +20,8 @@ module.exports = {
         exposes: {
           "./home": "./src/pages/index.tsx",
           "./pages-map": "./pages-map.js",
-          "./library": "./../library/src/index.ts",
+          "./library/components": "./../library/src/components/index.ts",
+          "./library/types": "./../library/src/types/index.ts",
         },
         remotes: remotes(options.isServer),
         shared: {},

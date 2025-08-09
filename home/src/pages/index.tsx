@@ -1,12 +1,11 @@
-import React from "react";
-import Head from "next/head";
+import { Product } from "@/library/types";
+import { message, Space, Spin, Typography } from "antd";
 import { NextPage } from "next";
 import dynamic from "next/dynamic";
-import { Product, useGetProductsQuery } from "../store/productsApi";
-import { useAppDispatch, useAppSelector } from "../store/hooks";
+import Head from "next/head";
 import { addToBasket } from "../store/basketSlice";
-import { Space, Spin, Typography } from "antd";
-import { CartItem } from "./../store/basketSlice";
+import { useAppDispatch } from "../store/hooks";
+import { useGetProductsQuery } from "../store/productsApi";
 
 const { Title, Text, Paragraph } = Typography;
 
@@ -30,7 +29,7 @@ const Home: NextPage = () => {
 
   const handleAddToCart = (product: Product) => {
     dispatch(addToBasket(product));
-    alert(`${product.title} added to basket!`);
+    message.success(`${product.title} added to basket!`);
   };
 
   return (

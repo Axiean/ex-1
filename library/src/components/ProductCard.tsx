@@ -1,35 +1,21 @@
-import React from "react";
-import { Card, Typography, Button, Tag, Rate, Tooltip } from "antd";
 import { HeartOutlined, ShoppingCartOutlined } from "@ant-design/icons";
+import { Button, Card, Rate, Tag, Tooltip, Typography } from "antd";
+import React from "react";
+import type { Product } from "../types";
 
 const { Title, Text, Paragraph } = Typography;
-
-export interface Product {
-  id: number;
-  title: string;
-  price: number;
-  description: string;
-  category: string;
-  image: string;
-  rating?: {
-    rate: number;
-    count: number;
-  };
-}
 
 export interface ProductCardProps {
   product: Product;
   onAddToCart: (product: Product) => void;
   onAddToWishlist?: (product: Product) => void;
 }
-// ---
 
 export const ProductCard: React.FC<ProductCardProps> = ({
   product,
   onAddToCart,
   onAddToWishlist = () => {},
 }) => {
-  // 2. Truncate the description if it's too long
   const isDescriptionLong = product.description.length > 55;
   const truncatedDescription = isDescriptionLong
     ? `${product.description.substring(0, 55)}...`
