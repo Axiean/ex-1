@@ -1,14 +1,12 @@
-
-
 name: Continuous Integration
 
 on:
   push:
     branches:
-      - [cite_start]"test/v1.0.0" # Triggers the workflow on push to the test branch [cite: 60]
+      - "test/v1.0.0"
   pull_request:
     branches:
-      - [cite_start]"prod/v1.0.0" # Triggers the workflow on pull requests to the prod branch [cite: 61]
+      - "prod/v1.0.0"
 
 jobs:
   build-and-test:
@@ -26,12 +24,11 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "22" 
+          node-version: "22"
           cache: "pnpm"
 
       - name: Install dependencies
-        run: pnpm install 
+        run: pnpm install
 
       - name: Build projects
-        run: pnpm run build 
-  
+        run: pnpm run build
