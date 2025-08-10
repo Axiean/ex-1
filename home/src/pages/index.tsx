@@ -7,6 +7,7 @@ import { addToBasket } from "../store/basketSlice";
 import { useAppDispatch } from "../store/hooks";
 import { useGetProductsQuery } from "../store/productsApi";
 import { useMediaQuery } from "@library/hooks/useMediaQuery";
+import { withErrorBoundary } from "@library/hocs";
 
 const { Title, Paragraph } = Typography;
 
@@ -23,10 +24,10 @@ const ProductList = dynamic<ProductListProps>(
   }
 );
 
+const SafeProductList = withErrorBoundary(ProductList);
+
 const Home: NextPage = () => {
   const { data: products, isLoading, error } = useGetProductsQuery();
-
-  const isMobile = useMediaQuery("(max-width: 768px)");
 
   const dispatch = useAppDispatch();
 
@@ -56,9 +57,8 @@ const Home: NextPage = () => {
           </Paragraph>
         </Space>
 
-        {error && <p>Error loading products.</p>}
         {products && (
-          <ProductList products={products} onAddToCart={handleAddToCart} />
+          <SafeProductList products={products} onAddToCart={handleAddToCart} />
         )}
       </div>
     </>

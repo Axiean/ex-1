@@ -18,7 +18,6 @@ module.exports = {
         dts: false,
         exposes: {
           "./products": "./src/pages/products.tsx",
-          "./pdp": "./src/pages/p/[...slug].tsx",
           "./ProductList": "./src/components/ProductsList.tsx",
           "./pages-map": "./pages-map.js",
         },
