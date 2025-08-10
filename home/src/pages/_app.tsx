@@ -3,9 +3,11 @@ import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { AppProps } from "next/app";
 import { Provider } from "react-redux";
 import { useAppSelector } from "../store/hooks";
-import { store } from "../store/store";
+import { persistor, store } from "../store/store";
 import "../styles/global.scss";
 import { useMediaQuery } from "@library/hooks/useMediaQuery";
+import { PersistGate } from "redux-persist/integration/react";
+import { Spin } from "antd";
 
 const AppNav = () => {
   const basketItems = useAppSelector((state) => state.basket.items);
@@ -23,10 +25,12 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <AntdRegistry>
       <Provider store={store}>
-        <AppNav />
-        <main style={{ padding: isMobile ? "1rem" : "2rem" }}>
-          <Component {...pageProps} />
-        </main>
+        <PersistGate loading={<Spin fullscreen />} persistor={persistor}>
+          <AppNav />
+          <main style={{ padding: isMobile ? "1rem" : "2rem" }}>
+            <Component {...pageProps} />
+          </main>
+        </PersistGate>
       </Provider>
     </AntdRegistry>
   );
