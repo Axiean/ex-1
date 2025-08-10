@@ -1,6 +1,24 @@
 {
+  /**
+   * @file Base TypeScript configuration for the monorepo.
+   * @description This file serves as the foundation for TypeScript settings across all
+   * workspaces (home, products, basket, library). Each individual project extends this
+   * base configuration, ensuring consistency in path resolution and compiler behavior
+   * while allowing for project-specific overrides. Centralizing common settings here
+   * is a critical best practice for maintainability in a monorepo architecture.
+   */
   "compilerOptions": {
+    /**
+     * Sets the base directory for resolving non-relative module imports. By setting it to ".",
+     * we establish the monorepo root as the starting point for path resolution.
+     */
     "baseUrl": ".",
+    /**
+     * Defines a set of path mappings that resolve aliases to file locations. This is the key
+     * to creating clean, non-relative imports throughout the monorepo. Instead of brittle
+     * imports like `import { Nav } from "../../../library/src/components"`, we can use the
+     * much cleaner and more maintainable alias `import { Nav } from "@library/components"`.
+     */
     "paths": {
       "@library/*": ["library/src/*"]
     }

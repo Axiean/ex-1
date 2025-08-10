@@ -11,6 +11,12 @@ interface BasketItemProps {
   onUpdateQuantity: (id: number, quantity: number) => void;
 }
 
+/**
+ * @component BasketItem
+ * @description Renders a single item within the basket list. It encapsulates the
+ * layout and user actions for an individual product, such as quantity adjustment
+ * and removal, delegating these actions to the parent component via callbacks.
+ */
 export const BasketItem: React.FC<BasketItemProps> = ({
   item,
   onRemoveItem,
@@ -18,6 +24,8 @@ export const BasketItem: React.FC<BasketItemProps> = ({
 }) => {
   return (
     <List.Item
+      // The `actions` prop provides a dedicated space for interactive elements,
+      // ensuring a consistent layout across all list items.
       actions={[
         <Space
           direction="vertical"

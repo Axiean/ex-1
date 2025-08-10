@@ -13,7 +13,6 @@ import {
   flushChunks,
 } from "@module-federation/nextjs-mf/utils";
 
-// Define an interface for the custom props that includes 'chunks'
 interface MyDocumentProps extends DocumentInitialProps {
   chunks: any[];
 }
