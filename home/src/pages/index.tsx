@@ -6,7 +6,6 @@ import Head from "next/head";
 import { addToBasket } from "../store/basketSlice";
 import { useAppDispatch } from "../store/hooks";
 import { useGetProductsQuery } from "../store/productsApi";
-import { useMediaQuery } from "@library/hooks/useMediaQuery";
 import { withErrorBoundary } from "@library/hocs";
 
 const { Title, Paragraph } = Typography;
