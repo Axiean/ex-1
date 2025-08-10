@@ -38,13 +38,11 @@ const BasketPage: NextPage = () => {
       <Head>
         <title>Shopping Cart</title>
       </Head>
-      <div style={{ padding: "2rem" }}>
-        <Basket
-          items={basketItems}
-          onRemoveItem={handleRemoveItem}
-          onUpdateQuantity={handleUpdateQuantity}
-        />
-      </div>
+      <Basket
+        items={basketItems}
+        onRemoveItem={handleRemoveItem}
+        onUpdateQuantity={handleUpdateQuantity}
+      />
     </>
   );
 };

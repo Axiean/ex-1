@@ -1,7 +1,7 @@
 import React from "react";
 import { List, Space, Button, Typography, Avatar } from "antd";
-import { PlusOutlined, MinusOutlined, DeleteOutlined } from "@ant-design/icons";
-import { CartItem } from "@library/types";
+import type { CartItem } from "@library/types";
+import { QuantityControl } from "./QuantityControl";
 
 const { Text } = Typography;
 
@@ -16,52 +16,46 @@ export const BasketItem: React.FC<BasketItemProps> = ({
   onRemoveItem,
   onUpdateQuantity,
 }) => {
-  // Style for the quantity display box
-  const quantityStyle: React.CSSProperties = {
-    width: 50,
-    textAlign: "center",
-    borderTop: "1px solid #d9d9d9",
-    borderBottom: "1px solid #d9d9d9",
-    padding: "4px 0",
-    display: "inline-flex",
-    alignItems: "center",
-    justifyContent: "center",
-    height: "32px", // Match default Ant Design button height
-  };
-
   return (
-    <List.Item>
+    <List.Item
+      actions={[
+        <Space
+          direction="vertical"
+          align="end"
+          style={{ width: "100px", gap: "2rem" }}
+        >
+          <Text strong>${(item.price * item.quantity).toFixed(2)}</Text>
+          <Button
+            style={{ padding: 0 }}
+            type="link"
+            danger
+            onClick={() => onRemoveItem(item.id)}
+          >
+            Remove
+          </Button>
+        </Space>,
+      ]}
+    >
       <List.Item.Meta
-        avatar={<Avatar shape="square" size={80} src={item.image} />}
-        title={<Text strong>{item.title}</Text>}
-        description={
-          <Space.Compact style={{ marginTop: "8px" }}>
-            <Button
-              icon={<MinusOutlined />}
-              onClick={() => onUpdateQuantity(item.id, item.quantity - 1)}
-              disabled={item.quantity <= 1}
+        avatar={
+          <Avatar
+            shape="square"
+            size={100}
+            src={item.image}
+            style={{ objectFit: "contain" }}
+          />
+        }
+        title={
+          <Space direction="vertical" size={4}>
+            <Text strong>{item.title}</Text>
+            <QuantityControl
+              itemId={item.id}
+              quantity={item.quantity}
+              onUpdateQuantity={onUpdateQuantity}
             />
-            <div style={quantityStyle}>
-              <Text>{item.quantity}</Text>
-            </div>
-            <Button
-              icon={<PlusOutlined />}
-              onClick={() => onUpdateQuantity(item.id, item.quantity + 1)}
-            />
-          </Space.Compact>
+          </Space>
         }
       />
-      <Space direction="vertical" align="end">
-        <Text strong>${(item.price * item.quantity).toFixed(2)}</Text>
-        <Button
-          type="link"
-          danger
-          icon={<DeleteOutlined />}
-          onClick={() => onRemoveItem(item.id)}
-        >
-          Remove
-        </Button>
-      </Space>
     </List.Item>
   );
 };
