@@ -30,7 +30,6 @@ const App: React.FC<BasketProps> = ({
     backgroundColor: "#ffffff",
     borderRadius: "8px",
     boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
-    // textAlign: "center",
   };
 
   if (items.length > 0) {
@@ -48,6 +47,10 @@ const App: React.FC<BasketProps> = ({
           )}
         />
         <BasketTotals subtotal={subtotal} />
+
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Est, atque!
+        </p>
       </div>
     );
   } else {

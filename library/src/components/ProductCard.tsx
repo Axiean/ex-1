@@ -61,13 +61,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         />,
       ]}
     >
-      <Tag color="red" style={{ position: "absolute", top: 16, left: 16 }}>
-        New
-      </Tag>
-
-      <Text type="secondary" style={{ textTransform: "uppercase" }}>
-        {product.category}
-      </Text>
+      <Tag color="blue">{product.category}</Tag>
 
       <Title level={5} style={{ marginTop: 8, height: 44, overflow: "hidden" }}>
         {product.title}

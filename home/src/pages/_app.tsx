@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import { useAppSelector } from "../store/hooks";
 import { store } from "../store/store";
 import "../styles/global.scss";
+import { useMediaQuery } from "@library/hooks/useMediaQuery";
 
 const AppNav = () => {
   const basketItems = useAppSelector((state) => state.basket.items);
@@ -17,11 +18,15 @@ const AppNav = () => {
 };
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const isMobile = useMediaQuery("(max-width: 768px)");
+
   return (
     <AntdRegistry>
       <Provider store={store}>
         <AppNav />
-        <Component {...pageProps} />
+        <main style={{ padding: isMobile ? "1rem" : "2rem" }}>
+          <Component {...pageProps} />
+        </main>
       </Provider>
     </AntdRegistry>
   );

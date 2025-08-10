@@ -6,8 +6,9 @@ import Head from "next/head";
 import { addToBasket } from "../store/basketSlice";
 import { useAppDispatch } from "../store/hooks";
 import { useGetProductsQuery } from "../store/productsApi";
+import { useMediaQuery } from "@library/hooks/useMediaQuery";
 
-const { Title, Text, Paragraph } = Typography;
+const { Title, Paragraph } = Typography;
 
 interface ProductListProps {
   products: Product[];
@@ -25,6 +26,8 @@ const ProductList = dynamic<ProductListProps>(
 const Home: NextPage = () => {
   const { data: products, isLoading, error } = useGetProductsQuery();
 
+  const isMobile = useMediaQuery("(max-width: 768px)");
+
   const dispatch = useAppDispatch();
 
   const handleAddToCart = (product: Product) => {
@@ -39,10 +42,9 @@ const Home: NextPage = () => {
         <link rel="icon" href="/nextjs-ssr/home/public/favicon.ico" />
       </Head>
 
-      <div style={{ padding: "2rem" }}>
+      <div>
         <Space direction="vertical">
           <Title level={5}>Products</Title>
-          {/* <Title level={2}>Products</Title> */}
           <Paragraph
             type="secondary"
             style={{ maxWidth: "600px", margin: "0 auto" }}
@@ -54,7 +56,6 @@ const Home: NextPage = () => {
           </Paragraph>
         </Space>
 
-        {isLoading && <p>Loading Products...</p>}
         {error && <p>Error loading products.</p>}
         {products && (
           <ProductList products={products} onAddToCart={handleAddToCart} />
