@@ -25,7 +25,21 @@ module.exports = {
           "./library/hooks": "./../library/src/hooks/index.ts",
         },
         remotes: remotes(options.isServer),
-        shared: {},
+        shared: {
+          ...deps,
+          react: {
+            singleton: true,
+            requiredVersion: deps.react,
+          },
+          "react-dom": {
+            singleton: true,
+            requiredVersion: deps["react-dom"],
+          },
+          antd: {
+            singleton: true,
+            requiredVersion: deps.antd,
+          },
+        },
         extraOptions: {
           exposePages: true,
         },
