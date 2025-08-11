@@ -1,10 +1,12 @@
 import type { CartItem } from "@library/types";
-import { List } from "antd";
+import { List, Typography } from "antd";
 import React from "react";
 import { BasketItem } from "./components/BasketItem";
 import { BasketTotals } from "./components/BasketTotals";
 import { EmptyBasket } from "./components/EmptyBasket";
 import { useMediaQuery } from "@library/hooks";
+
+const { Text } = Typography;
 
 interface BasketProps {
   /**
@@ -73,9 +75,11 @@ const App: React.FC<BasketProps> = ({
         />
         <BasketTotals subtotal={subtotal} />
 
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Est, atque!
-        </p>
+        <div style={{ textAlign: "center" }}>
+          <Text type="secondary">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Est, atque.
+          </Text>
+        </div>
       </div>
     );
   } else {
