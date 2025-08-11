@@ -1,5 +1,14 @@
 import { HeartOutlined, ShoppingCartOutlined } from "@ant-design/icons";
-import { Button, Card, Rate, Tag, Tooltip, Typography } from "antd";
+import {
+  Button,
+  Card,
+  Flex,
+  Rate,
+  Space,
+  Tag,
+  Tooltip,
+  Typography,
+} from "antd";
 import React from "react";
 import type { Product } from "../types";
 
@@ -45,29 +54,25 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         />
       }
       actions={[
-        <Button
-          type="default"
-          icon={<ShoppingCartOutlined />}
-          key="add-to-cart"
-          onClick={() => onAddToCart(product)}
-        >
-          Add to Cart
-        </Button>,
-        <Button
-          icon={<HeartOutlined />}
-          shape="circle"
-          key="wishlist"
-          onClick={() => onAddToWishlist(product)}
-        />,
+        <Flex style={{ gap: "8px", padding: "0 8px" }}>
+          <Button
+            type="default"
+            icon={<ShoppingCartOutlined />}
+            key="add-to-cart"
+            onClick={() => onAddToCart(product)}
+            block
+          >
+            Add to Cart
+          </Button>
+          <Button
+            icon={<HeartOutlined />}
+            key="wishlist"
+            onClick={() => onAddToWishlist(product)}
+          />
+        </Flex>,
       ]}
     >
-      <Tag color="red" style={{ position: "absolute", top: 16, left: 16 }}>
-        New
-      </Tag>
-
-      <Text type="secondary" style={{ textTransform: "uppercase" }}>
-        {product.category}
-      </Text>
+      <Tag color="blue">{product.category}</Tag>
 
       <Title level={5} style={{ marginTop: 8, height: 44, overflow: "hidden" }}>
         {product.title}

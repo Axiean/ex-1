@@ -1,0 +1,11 @@
+# Ignore all node_modules directories
+**/node_modules
+
+# Ignore build artifacts
+.next
+dist
+
+# Ignore local development files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

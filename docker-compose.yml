@@ -1,0 +1,18 @@
+# Defines the services that make up the application. In this case, a single service
+# is sufficient to run the entire monorepo.
+services:
+  app:
+    # Instructs Docker Compose to build an image from the Dockerfile in the current directory ('.').
+    build: .
+    # Maps the host machine's ports to the container's ports. This makes the applications
+    # running inside the container accessible from the host's browser.
+    # Format: HOST:CONTAINER
+    ports:
+      - "3000:3000" # Maps host port 3000 to container port 3000 (for the 'basket' app)
+      - "3001:3001" # Maps host port 3001 to container port 3001 (for the 'home' app)
+      - "3002:3002" # Maps host port 3002 to container port 3002 (for the 'products' app)
+    # Sets environment variables within the container.
+    environment:
+      # Setting NODE_ENV to 'production' is critical for performance and security.
+      # It ensures that Next.js and other libraries run in their optimized production mode.
+      - NODE_ENV=production
