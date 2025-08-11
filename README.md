@@ -97,8 +97,8 @@ As requested, this project does not use any dedicated styling libraries like Sas
 1.  **Clone the repository:**
 
     ```bash
-    git clone <https://github.com/Axiean/ex-1>
-    cd <ex-1>
+    git clone https://github.com/Axiean/ex-1
+    cd ex-1
     ```
 
 2.  **Install dependencies:**
