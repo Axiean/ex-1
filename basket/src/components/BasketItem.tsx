@@ -35,11 +35,10 @@ export const BasketItem: React.FC<BasketItemProps> = ({
           <Text strong>${(item.price * item.quantity).toFixed(2)}</Text>
           <Button
             style={{ padding: 0 }}
-            type="link"
-            danger
+            type="text"
             onClick={() => onRemoveItem(item.id)}
           >
-            Remove
+            <u>Remove</u>
           </Button>
         </Space>,
       ]}
